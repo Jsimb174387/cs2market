@@ -1,9 +1,9 @@
 import requests
 import json
-import config
 
 
 def createJSON():
+    import config
     response = requests.get(f"https://www.steamwebapi.com/steam/api/items?key={config.swa_key}")
 
     if response.status_code == 200:
