@@ -6,9 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <h1>Heading</h1>
-    <p>This is a Paragraph</p>
-     <a href="https://csstats-ufu7rpghzq-uc.a.run.app/market/skinport/buff163/10">Skinport and Buff</a>
-</body>
+<p>Current URL: <span id="currentUrl"></span></p>
+
+<!-- Create a hyperlink with the current URL -->
+<a id="currentUrlLink" href="#">Skinport and Buff</a>
+<script>
+    // JavaScript code to get the current URL
+    var currentUrl = window.location.href;
+
+    // Display the current URL on the webpage
+    document.getElementById("currentUrl").textContent = currentUrl;
+
+    // Set the href attribute of the hyperlink to the current URL
+    document.getElementById("currentUrlLink").href = currentUrl + "/market/skinport/buff163/100";
+</script>
+
 </html>
