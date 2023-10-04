@@ -4,7 +4,6 @@ import requests
 import hashtoicon
 from icon import display
 from flask import Flask, render_template
-
 from market import check_report, check_item
 
 app = Flask(__name__)
