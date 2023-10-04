@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Images with Item Names</title>
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .item-name-overlay {
+            position: absolute;
+            bottom: 10px; /* Adjust the position as needed */
+            left: 10px; /* Adjust the position as needed */
+            background-color: rgba(255, 255, 255, 0.7); /* Background color with transparency */
+            padding: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .item-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<h1>Images with Item Names</h1>
+<ul>
+    {% for image_url, item_name, item_price, item_gain in image_urls %}
+    <li class="image-container">
+        <img src="{{ image_url }}" alt="{{ item_name }}" class="item-image">
+
+        <div class="item-name-overlay">{{ item_name, item_gain }}</div>
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
