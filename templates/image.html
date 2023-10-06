@@ -25,15 +25,33 @@
     </style>
 </head>
 <body>
-<h1>Images with Item Names</h1>
+<h1>Profit when converting from skinport to Buff163</h1>
+<style>
+table, th, td {
+border:1px solid black;
+}
+</style>
 <ul>
+    <table>
+        <tr>
+            <td>Icon</td>
+            <td>Market Name</td>
+            <td>Starting Price</td>
+            <td>Sale Price</td>
+            <td>Percent Profit</td>
+            <td>Profit</td>
+        </tr>
     {% for image_url, item_name, item_price, item_gain in image_urls %}
-    <li class="image-container">
-        <img src="{{ image_url }}" alt="{{ item_name }}" class="item-image">
-
-        <div class="item-name-overlay">{{ item_name, item_gain }}</div>
-    </li>
+        <tr>
+            <td> <img src="{{ image_url }}" alt="{{ item_name }}" class="item-image"> </td>
+            <td> {{item_name}} </td>
+            <td> {{item_price[1]}}</td>
+            <td> {{item_price[2]}}</td>
+            <td> {{item_price[0]}}</td>
+            <td> {{item_gain}} </td>
+        </tr>
     {% endfor %}
+    </table>
 </ul>
 </body>
 </html>

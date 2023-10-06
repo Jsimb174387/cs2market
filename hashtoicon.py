@@ -17,5 +17,6 @@ def getmanyIcons(hashList, size = 200):
         # Reading from json file
         item_data = json.load(openfile)
     for item in hashList:
-        urlList.append([item_data[item[0]][0] + f"/{size}fx{size}f", item[0], item[1], item[1][2] - item[1][1]])
+        gain = '${:,.2f}'.format(item[1][2] - item[1][1])
+        urlList.append([item_data[item[0]][0] + f"/{size}fx{size}f", item[0], item[1], gain])
     return urlList

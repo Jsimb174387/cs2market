@@ -1,17 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Display Images</title>
+    <title>Display Images with Item Names</title>
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .item-name-overlay {
+            position: absolute;
+            bottom: 10px; /* Adjust the position as needed */
+            left: 10px; /* Adjust the position as needed */
+            background-color: rgba(255, 255, 255, 0.7); /* Background color with transparency */
+            padding: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .item-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>Images from URLs</h1>
-    <ul>
-        {% for image_url in image_urls %}
-            <li>
-                <p>"{{ image_url[1] }}"<p>
-                <img src="{{ image_url[0] }}" alt="name">
-            </li>
-        {% endfor %}
-    </ul>
+<h1>Profit when converting from skinport to Buff163</h1>
+<style>
+table, th, td {
+border:1px solid black;
+}
+</style>
+<ul>
+    <table style="width:100%">
+    {% for image_url, item_name, item_price, item_gain in image_urls %}
+    <li class="image-container">
+        <img src="{{ image_url }}" alt="{{ item_name }}" class="item-image">
+
+        <div class="item-name-overlay">{{ item_name, item_gain }}</div>
+    </li>
+    {% endfor %}
+    </table>
+</ul>
 </body>
 </html>
