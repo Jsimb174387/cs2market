@@ -1,5 +1,5 @@
-﻿import requests
-import json
+﻿import json
+import requests
 
 def percent_change(starting_value, ending_value):
     p_change = ending_value - starting_value

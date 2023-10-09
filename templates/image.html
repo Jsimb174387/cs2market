@@ -1,57 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Display Images with Item Names</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit when converting from Skinport to Buff163</title>
     <style>
-        .image-container {
-            position: relative;
-            display: inline-block;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
         }
 
-        .item-name-overlay {
-            position: absolute;
-            bottom: 10px; /* Adjust the position as needed */
-            left: 10px; /* Adjust the position as needed */
-            background-color: rgba(255, 255, 255, 0.7); /* Background color with transparency */
-            padding: 5px;
-            font-size: 16px;
-            font-weight: bold;
+        h1 {
+            text-align: center;
+            background-color: #0073e6;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        th {
+            background-color: #0073e6;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
 
         .item-image {
-            max-width: 100%;
+            max-width: 100px; /* Limit image width */
             height: auto;
+        }
+
+        /* Hover effect for table rows */
+        tr:hover {
+            background-color: #ddd;
         }
     </style>
 </head>
 <body>
-<h1>Profit when converting from skinport to Buff163</h1>
-<style>
-table, th, td {
-border:1px solid black;
-}
-</style>
-<ul>
-    <table>
-        <tr>
-            <td>Icon</td>
-            <td>Market Name</td>
-            <td>Starting Price</td>
-            <td>Sale Price</td>
-            <td>Percent Profit</td>
-            <td>Profit</td>
-        </tr>
-    {% for image_url, item_name, item_price, item_gain in image_urls %}
-        <tr>
-            <td> <img src="{{ image_url }}" alt="{{ item_name }}" class="item-image"> </td>
-            <td> {{item_name}} </td>
-            <td> {{item_price[1]}}</td>
-            <td> {{item_price[2]}}</td>
-            <td> {{item_price[0]}}</td>
-            <td> {{item_gain}} </td>
-        </tr>
-    {% endfor %}
+    <h1>Profit when converting from Skinport to Buff163</h1>
+    <table id="item-table">
+        <thead>
+            <tr>
+                <th>Icon</th>
+                <th>Market Name</th>
+                <th onclick="sortTable(2)">Starting Price</th>
+                <th onclick="sortTable(3)">Sale Price</th>
+                <th onclick="sortTable(4)">Percent Profit</th>
+                <th onclick="sortTable(5)">Profit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for image_url, item_name, item_price, item_gain in image_urls %}
+            <tr>
+                <td>
+                    <img src="{{ image_url }}" alt="{{ item_name }}" class="item-image">
+                </td>
+                <td>{{ item_name }}</td>
+                <td>{{ item_price[1] }}</td>
+                <td>{{ item_price[2] }}</td>
+                <td>{{ item_price[0] }}</td>
+                <td>{{ item_gain }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-</ul>
+
+    <script>
+        function sortTable(columnIndex) {
+            const table = document.getElementById("item-table");
+            const rows = Array.from(table.getElementsByTagName("tr"));
+            const header = rows[0].getElementsByTagName("th")[columnIndex];
+            const isNumeric = columnIndex >= 2 && columnIndex <= 5;
+            const ascending = header.classList.contains("ascending");
+    
+            rows.shift(); // Remove header row from sorting
+    
+            rows.sort((a, b) => {
+                let aValue = a.getElementsByTagName("td")[columnIndex].textContent.trim();
+                let bValue = b.getElementsByTagName("td")[columnIndex].textContent.trim();
+    
+                if (isNumeric) {
+                    aValue = parseFloat(aValue.replace(/[^0-9.-]+/g, ""));
+                    bValue = parseFloat(bValue.replace(/[^0-9.-]+/g, ""));
+                }
+    
+                return ascending ? aValue - bValue : bValue - aValue;
+            });
+    
+            // Add back the header row
+            rows.unshift(table.rows[0]);
+    
+            // Update the class for sorting direction
+            header.classList.toggle("ascending");
+    
+            // Rebuild the table with sorted rows
+            while (table.firstChild) {
+                table.removeChild(table.firstChild);
+            }
+            rows.forEach(row => table.appendChild(row));
+        }
+    </script>
 </body>
 </html>
